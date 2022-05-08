@@ -35,13 +35,15 @@ typedef struct{
  */
 int main(void) {
 		SIM->SCGC5 |= (1 << 9) | (1 << 13);
-
+		
+		//configura os pinos como GPIO
 		PORT_E->PCR[1] |= (1 << 8);
 		PORT_E->PCR[29] |= (1 << 8);
 
 		PORT_A->PCR[12] |= (1 << 8) | (1 << 1) | (1 << 0);
 		PORT_A->PCR[5] |= (1 << 8) | (1 << 1) | (1 << 0);
 
+		//configura os pinos como saída e ativa
 		GPIO_E->PDDR |= (1 << 1);
 
 		GPIO_E->PSOR |= (1 << 1);
@@ -51,6 +53,8 @@ int main(void) {
 		GPIO_E->PSOR |= (1 << 29);
 
 		while(1){
+			
+			//se a flag de entrada estiver ativada o led desliga
 			if(GPIO_A->PDIR & (1 << 12)){
 				// LED OFF
 				GPIO_E->PSOR |= (1 << 1);
