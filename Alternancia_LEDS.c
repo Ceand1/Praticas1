@@ -47,17 +47,18 @@ void delay(int n){
  */
 int main(void) {
 		SIM->SCGC5 = (1 << 9) | (1 << 12);
-
+	
+		//Configura os pinos como GPIO
 		PORT_A->PCR[1] |= (1 << 8);
 		PORT_A->PCR[2] |= (1 << 8);
 		PORT_A->PCR[4] |= (1 << 8);
 
-
+		//Configura os pinos como saída
 		GPIO_A->PDDR |= (1 << 1);
 		GPIO_A->PDDR |= (1 << 2);
 		GPIO_A->PDDR |= (1 << 4);
 
-
+		//liga e desliga o red
 		GPIO_A->PSOR |= (1 << 1);
 
 		delay(1000000);
@@ -66,7 +67,7 @@ int main(void) {
 
 		delay(1000000);
 
-
+		//liga e desliga o verde
 		GPIO_A->PSOR |= (1 << 2);
 
 		delay(1000000);
@@ -74,7 +75,8 @@ int main(void) {
 		GPIO_A->PCOR |= (1 << 2);
 
 		delay(1000000);
-
+		
+		//liga e desliga o azul
 		GPIO_A->PSOR |= (1 << 4);
 
 
